@@ -26,8 +26,8 @@ export const requestFCMPermission = async (): Promise<void> => {
     if (token) {
       console.log("FCM Token:", token);
       
-      if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({ fcmToken: token }));
+      if (window['ReactNativeWebView'] && window['ReactNativeWebView'].postMessage) {
+        window['ReactNativeWebView'].postMessage(JSON.stringify({ fcmToken: token }));
       }
     } else {
       console.log("No FCM registration token available.");
