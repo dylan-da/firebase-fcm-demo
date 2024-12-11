@@ -26,8 +26,19 @@ export const requestFCMPermission = async (): Promise<void> => {
     if (token) {
       console.log("FCM Token:", token);
       
-      if ((window as any)["ReactNativeWebView"] && (window as any)['ReactNativeWebView'].postMessage) {
-        (window as any)['ReactNativeWebView'].postMessage(JSON.stringify({ fcmToken: token }));
+      const tokenElement = document.createElement("div");
+      tokenElement.id = "fcm-token";
+      tokenElement.style.margin = "20px";
+      tokenElement.style.padding = "10px";
+      tokenElement.style.border = "1px solid #ccc";
+      tokenElement.style.backgroundColor = "#f9f9f9";
+      tokenElement.textContent = `FCM Token: ${token}`;
+      document.body.appendChild(tokenElement);
+
+      // Alternatively, update an existing element
+      const existingTokenElement = document.getElementById("fcm-token-display");
+      if (existingTokenElement) {
+        existingTokenElement.textContent = `FCM Token: ${token}`;
       }
     } else {
       console.log("No FCM registration token available.");
